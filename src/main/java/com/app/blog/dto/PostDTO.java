@@ -15,7 +15,6 @@ import org.hibernate.validator.constraints.Length;
  * @author 1460344
  */
 public class PostDTO {
-
     @NotBlank(message = "should not be empty")
     @Length(max = 450)
     @Valid

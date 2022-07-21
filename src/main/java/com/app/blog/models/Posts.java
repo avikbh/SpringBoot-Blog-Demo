@@ -5,6 +5,9 @@
  */
 package com.app.blog.models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
+
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Basic;

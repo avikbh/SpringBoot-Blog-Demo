@@ -84,4 +84,22 @@ public class JWTUtils {
         final String username = getEmailFromToken(token);
         return (username.equals(userDetails.getUsername()));
     }
+
+    //retrieve userid from jwt token
+    public String getUserId(String token) {
+        final Claims claims = getAllClaimsFromToken(token);
+        return claims.get("user_id").toString();
+    }
+
+    //retrieve jwt token from Auth Header
+    public String getTokenFromHeader(String authorization) {
+        String token="";
+        if(null != authorization && authorization.startsWith("Bearer ")) {
+            token = authorization.substring(7);
+        }
+        return token;
+    }
+
+
+
 }

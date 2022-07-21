@@ -21,7 +21,8 @@ public class PostMapper {
         map.put("title", post.getPostTitle());
         map.put("body", post.getPostBody());
         map.put("created_on",post.getCreatedOn());
-        map.put("created_by", post.getPublishedBy().getUserName());
+        if(post.getPublishedBy()!=null && post.getPublishedBy().getUserName()!=null)
+            map.put("created_by", post.getPublishedBy().getUserName());
         map.put("last_updated", post.getUpdatedOn());
         return map;
     } 

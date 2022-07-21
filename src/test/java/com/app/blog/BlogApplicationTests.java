@@ -80,12 +80,12 @@ class BlogApplicationTests {
 	public void test2_login() {
 		try {
 			LoginDto obj = new LoginDto();
-			obj.setEmail("test");
-			obj.setPassword("12345");
+			obj.setEmail(user);
+			obj.setPassword(pass);
 			JSONObject json = new JSONObject(
 					template.postForEntity("http://localhost:" + port + "/login/", obj, String.class).getBody());
 			assertEquals(json.getString("data"), "Invalid Username or Password");
-			obj.setEmail("test@gmail.com");
+			obj.setEmail(user + "@gmail.com");
 			json = new JSONObject(
 					template.postForEntity("http://localhost:" + port + "/login/", obj, String.class).getBody());
 			jwt = json.getString("data");
@@ -110,7 +110,7 @@ class BlogApplicationTests {
 	@Test
 	public void test3_publishPost() {
 		try {
-			PostDTO post = new PostDTO();
+		PostDTO post = new PostDTO();
 			postTitle = generateString();
 			postBody = generateString();
 			post.setTitle(postTitle);
@@ -202,6 +202,31 @@ class BlogApplicationTests {
 			assert (false);
 		}
 	}
+
+//	@Test
+//	public void test9_getPost() {
+//		try {
+//			HttpHeaders headers = new HttpHeaders();
+//			headers.set("authorization", "Bearer " + jwt);
+//			JSONObject json;
+//			boolean pass = false;
+//
+//				json = new JSONObject(template.exchange("http://localhost:" + port + "/api/getPostByUser/4",
+//						HttpMethod.GET, new HttpEntity<String>(headers), String.class).getBody());
+//				if (!json.get("data").toString().contentEquals("No posts by user Id " + 4)
+//						&& json.getJSONArray("data").getJSONObject(0).getString("title").contentEquals(postTitle)
+//						&& json.getJSONArray("data").getJSONObject(0).getString("body").contentEquals(postBody)
+//						&& json.getJSONArray("data").getJSONObject(0).getString("created_by").contentEquals(user)) {
+//					pass = true;
+//
+//
+//			}
+//			assert (pass);
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//			assert (false);
+//		}
+//	}
 
 	@Test
 	public void test7_updatePost() {
